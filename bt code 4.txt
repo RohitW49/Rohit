@@ -1,0 +1,34 @@
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.7;
+
+contract Student{
+	struct details{
+		uint id;
+		string name;
+	}
+	details[] stud;
+	uint nextId=0;
+
+	function create(string memory name)public {
+		stud.push(details(nextId++,name));
+	}
+	function read(uint id)public view returns(uint,string memory ){
+		for(uint i=0;i<stud.length;i++){
+			if(stud[i].id==id){
+				return(stud[i].id,stud[i].name);
+			}
+		}
+		return (0, "");
+	}
+	function update(uint id,string memory name) public {
+		for(uint i=0;i<stud.length;i++){
+			if(stud[i].id==id){
+				stud[i].name=name;
+			}
+		}
+	}
+	function del(uint id) public {
+		delete stud[id];
+	}
+}
+
